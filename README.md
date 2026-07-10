@@ -1,6 +1,6 @@
 # 🏆 2026 World Cup — Three-Lens Prediction
 
-An interactive dashboard comparing three ways of predicting the 2026 World Cup winner:
+An interactive model and dashboard comparing three ways of predicting the 2026 World Cup winner:
 
 1. **🗳️ What people predict** — crowd wisdom from a LinkedIn poll
 2. **📊 What the data says** — Elo ratings (every international match since 1901, importance-weighted) run through 200,000 Monte Carlo simulations of the remaining bracket

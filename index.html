@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2026 World Cup — Three-Lens Prediction</title>
+<style>
+  :root{
+    --bg:#ffffff; --card:#f6f8fa; --border:#d0d7de; --text:#1f2328; --muted:#656d76;
+    --poll:#d29200; --data:#0969da; --ai:#1a7f37;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);padding:32px 20px;max-width:960px;margin:0 auto}
+  h1{font-size:26px;margin-bottom:4px}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:24px}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px}
+  .card h2{font-size:15px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:14px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  label{font-size:13px;color:var(--muted);display:block;margin-bottom:4px}
+  select,input[type=number]{width:100%;padding:8px 10px;border-radius:8px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:14px}
+  .poll-row{display:grid;grid-template-columns:110px 1fr 60px;gap:10px;align-items:center;margin-bottom:8px}
+  .poll-row input[type=range]{width:100%;accent-color:var(--poll)}
+  .poll-val{font-size:13px;color:var(--poll);text-align:right}
+  button{background:var(--ai);color:#ffffff;border:none;border-radius:8px;padding:10px 22px;font-size:15px;font-weight:600;cursor:pointer;margin-top:12px}
+  button:hover{filter:brightness(1.1)}
+  .team-block{margin-bottom:18px}
+  .team-name{font-size:15px;font-weight:600;margin-bottom:6px;display:flex;justify-content:space-between}
+  .lens-row{display:grid;grid-template-columns:56px 1fr 52px;gap:8px;align-items:center;margin-bottom:4px;font-size:12px;color:var(--muted)}
+  .bar-track{background:#e8ebee;border:1px solid var(--border);border-radius:5px;height:14px;overflow:hidden}
+  .bar{height:100%;border-radius:5px;transition:width .5s ease}
+  .bar.poll{background:var(--poll)} .bar.data{background:var(--data)} .bar.ai{background:var(--ai)}
+  .pct{text-align:right;font-variant-numeric:tabular-nums}
+  .legend{display:flex;gap:18px;font-size:13px;color:var(--muted);margin-bottom:16px}
+  .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px}
+  .verdict{font-size:14px;line-height:1.6;color:var(--text);border-left:3px solid var(--ai);padding-left:12px;margin-top:8px}
+  .foot{color:var(--muted);font-size:12px;margin-top:16px;line-height:1.5}
+  @media(max-width:640px){.grid{grid-template-columns:1fr}}
+  .credit{text-align:center;margin-top:28px;font-size:13px;color:var(--muted)}
+  .credit a{color:var(--data);text-decoration:none;font-weight:600}
+  .credit .refresh{font-size:12px;margin-top:4px}
+  .lenses{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:20px}
+  .lens-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;border-top:4px solid}
+  .lens-card.l-poll{border-top-color:var(--poll)} .lens-card.l-data{border-top-color:var(--data)} .lens-card.l-ai{border-top-color:var(--ai)}
+  .lens-card h3{font-size:14px;margin-bottom:6px}
+  .lens-card p{font-size:12.5px;color:var(--muted);line-height:1.5}
+  .lens-card a{color:var(--data);font-weight:600;text-decoration:none}
+  .star{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);font-weight:400}
+  details.why{margin-top:16px;border:1px solid var(--border);border-radius:10px;padding:12px 16px;background:var(--bg)}
+  details.why summary{cursor:pointer;font-size:13.5px;font-weight:600;color:var(--text)}
+  details.why p{font-size:13px;color:var(--muted);line-height:1.6;margin-top:10px}
+  details.why b{color:var(--text)}
+  .avatar{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--data);color:#fff;font-size:9px;font-weight:700}
+  @media(max-width:640px){.lenses{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<h1>&#127942; 2026 World Cup — Who Wins It All?</h1>
+<div class="sub">Three lenses: what people predict &middot; what the data says &middot; what an AI-assisted model says</div>
+
+<div class="lenses">
+  <div class="lens-card l-poll">
+    <h3>&#128499;&#65039; What people predict</h3>
+    <p>Crowd wisdom from my <a href="POLL_URL_HERE" target="_blank">LinkedIn poll &rarr;</a>
+    Raw vote shares, normalized across the final four. Hearts, not spreadsheets.</p>
+  </div>
+  <div class="lens-card l-data">
+    <h3>&#128202; What the data says</h3>
+    <p>Elo ratings built from <b>every international match since 1901</b> &mdash; each result
+    nudges a team's rating, weighted by match importance (World Cup games count ~4&times; a friendly)
+    and recency. 200,000 Monte Carlo runs of the remaining bracket.</p>
+  </div>
+  <div class="lens-card l-ai">
+    <h3>&#129302; AI-assisted model</h3>
+    <p>An ensemble: Elo (60%) + FIFA points (40%) + tournament form + <b>player quality</b>
+    (Transfermarkt squad market value &mdash; e.g. France &euro;1.52B vs Switzerland &euro;333M)
+    &mdash; then blended with de-vigged betting-market odds.</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>1 &middot; Set the semifinals</h2>
+  <div class="grid">
+    <div><label>Semifinal 1 — Team A</label><select id="sf1a"></select></div>
+    <div><label>Semifinal 1 — Team B</label><select id="sf1b"></select></div>
+    <div><label>Semifinal 2 — Team A</label><select id="sf2a"></select></div>
+    <div><label>Semifinal 2 — Team B</label><select id="sf2b"></select></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>2 &middot; Your LinkedIn poll (% of votes)</h2>
+  <div id="pollInputs"></div>
+</div>
+
+<button id="runBtn">Run 200,000 simulations</button>
+
+<div class="card" style="margin-top:20px">
+  <h2>Title probabilities</h2>
+  <div class="legend">
+    <span><span class="dot" style="background:var(--poll)"></span>Poll (people)</span>
+    <span><span class="dot" style="background:var(--data)"></span>Data (Elo sim)</span>
+    <span><span class="dot" style="background:var(--ai)"></span>AI ensemble</span>
+  </div>
+  <div id="results"></div>
+  <div class="verdict" id="verdict"></div>
+
+  <details class="why">
+    <summary>&#127922; Why Monte Carlo, and why 200,000 simulations?</summary>
+    <p><b>Why Monte Carlo?</b> A tournament isn't one prediction — it's a chain of them. To win,
+    a team must survive its semifinal <i>and</i> beat whoever emerges from the other side, and each
+    possible opponent changes the odds. Instead of trying to write one giant formula, Monte Carlo
+    just <b>plays out the whole bracket over and over</b>, flipping a weighted coin for every match
+    (weighted by Elo strength). A team's title probability is simply the share of simulated
+    tournaments it wins. Same technique banks use for risk and forecasters use for elections.</p>
+    <p><b>Why 200,000?</b> Because simulations are random, running them twice gives slightly
+    different answers — that wobble shrinks with more runs. The noise on a probability estimate is
+    roughly &radic;(p(1&minus;p)/n): at 10,000 runs, a "35%" could read anywhere from 34% to 36%;
+    at <b>200,000 runs it's stable to about &plusmn;0.2%</b> — steadier than the inputs themselves.
+    Beyond that, more simulations add compute, not accuracy: the answer is only as good as the
+    ratings going in.</p>
+  </details>
+
+  <div class="foot">
+    Data lens: Elo Monte Carlo (win prob = 1/(1+10^(-&Delta;Elo/400))), bracket-aware.
+    AI lens: blends Elo (60%) + rescaled FIFA points (40%) + tournament form boost
+    + squad strength (player quality via Transfermarkt market value, log z-score &rarr; Elo pts),
+    simulated, then averaged 65/35 with de-vigged betting-market probabilities.
+    Ratings: worldfootballrankings.com, Jul 9 2026. Odds: FanDuel/ESPN, Jul 3&ndash;9 2026.
+    Squad values: Transfermarkt, 2026 WC squads.
+  </div>
+</div>
+
+<div class="credit">
+  Built with &#10084;&#65039;&#8205;&#128293; by <a href="https://www.linkedin.com/in/danielamatinho" target="_blank">Daniela Matinho</a> &middot; <a href="#" target="_blank">AI, Actually Newsletter</a>
+  <div class="refresh">Data updated manually &middot; Last refresh: July 9, 2026</div>
+</div>
+
+<script>
+const TEAMS = {
+  "France":      {elo:1925.86, fifa:1870.70, change:55.17, odds:180,  value:1520.0, flag:"\u{1F1EB}\u{1F1F7}", star:"Kylian Mbappé"},
+  "Argentina":   {elo:1925.15, fifa:1877.27, change:47.88, odds:400,  value:807.5,  flag:"\u{1F1E6}\u{1F1F7}", star:"Lionel Messi"},
+  "Spain":       {elo:1912.34, fifa:1874.71, change:37.63, odds:360,  value:1220.0, flag:"\u{1F1EA}\u{1F1F8}", star:"Lamine Yamal"},
+  "England":     {elo:1871.39, fifa:1828.02, change:43.36, odds:460,  value:1360.0, flag:"\u{1F3F4}\u{E0067}\u{E0062}\u{E0065}\u{E006E}\u{E0067}\u{E007F}", star:"Jude Bellingham"},
+  "Belgium":     {elo:1778.36, fifa:1742.24, change:36.12, odds:4500, value:547.5,  flag:"\u{1F1E7}\u{1F1EA}", star:"Kevin De Bruyne"},
+  "Switzerland": {elo:1710.88, fifa:1650.06, change:60.82, odds:5500, value:332.5,  flag:"\u{1F1E8}\u{1F1ED}", star:"Granit Xhaka"},
+  "Norway":      {elo:1651.29, fifa:1557.44, change:93.85, odds:4000, value:589.9,  flag:"\u{1F1F3}\u{1F1F4}", star:"Erling Haaland"},
+};
+const initials = n => n.split(" ").map(w=>w[0]).join("").slice(0,2).toUpperCase();
+const N = 200000, FORM_W = 0.25, SQUAD_ELO = 40;
+// Squad-strength (player quality) signal: z-score of log market value -> Elo pts
+const SQUAD_ADJ = (()=>{
+  const ks = Object.keys(TEAMS), logs = ks.map(t=>Math.log(TEAMS[t].value));
+  const mean = logs.reduce((a,b)=>a+b,0)/logs.length;
+  const std = Math.sqrt(logs.reduce((s,v)=>s+(v-mean)**2,0)/logs.length);
+  const adj = {}; ks.forEach((t,i)=>adj[t]=SQUAD_ELO*(logs[i]-mean)/std);
+  return adj;
+})();
+const names = Object.keys(TEAMS);
+const defaults = {sf1a:"France", sf1b:"Spain", sf2a:"Argentina", sf2b:"England"};
+
+["sf1a","sf1b","sf2a","sf2b"].forEach(id=>{
+  const sel = document.getElementById(id);
+  names.forEach(n=>{ const o=document.createElement("option"); o.value=n; o.textContent=`${TEAMS[n].flag} ${n}`; sel.appendChild(o); });
+  sel.value = defaults[id];
+  sel.addEventListener("change", buildPoll);
+});
+
+function final4(){ return ["sf1a","sf1b","sf2a","sf2b"].map(id=>document.getElementById(id).value); }
+
+function buildPoll(){
+  const box = document.getElementById("pollInputs");
+  const prev = {}; box.querySelectorAll("input[type=range]").forEach(i=>prev[i.dataset.team]=i.value);
+  box.innerHTML = "";
+  final4().forEach(t=>{
+    const v = prev[t] ?? 25;
+    box.insertAdjacentHTML("beforeend",
+      `<div class="poll-row"><span>${TEAMS[t].flag} ${t}</span>
+       <input type="range" min="0" max="100" value="${v}" data-team="${t}"
+         oninput="this.parentElement.querySelector('.poll-val').textContent=this.value+'%'">
+       <span class="poll-val">${v}%</span></div>`);
+  });
+}
+buildPoll();
+
+const winP = (a,b,r)=> 1/(1+Math.pow(10,-(r[a]-r[b])/400));
+const impliedP = o => o>0 ? 100/(o+100) : -o/(-o+100);
+
+function simulate(r, sf1, sf2){
+  const wins = {}; [...sf1,...sf2].forEach(t=>wins[t]=0);
+  const p1 = winP(sf1[0],sf1[1],r), p2 = winP(sf2[0],sf2[1],r);
+  const pf = {};
+  sf1.forEach(a=>sf2.forEach(b=>pf[a+"|"+b]=winP(a,b,r)));
+  for(let i=0;i<N;i++){
+    const f1 = Math.random()<p1 ? sf1[0] : sf1[1];
+    const f2 = Math.random()<p2 ? sf2[0] : sf2[1];
+    wins[Math.random()<pf[f1+"|"+f2] ? f1 : f2]++;
+  }
+  Object.keys(wins).forEach(t=>wins[t]/=N);
+  return wins;
+}
+
+document.getElementById("runBtn").addEventListener("click", ()=>{
+  const f4 = final4();
+  if(new Set(f4).size !== 4){ alert("Pick four different teams."); return; }
+  const sf1 = f4.slice(0,2), sf2 = f4.slice(2);
+
+  // Lens 2: pure Elo
+  const eloR = {}; f4.forEach(t=>eloR[t]=TEAMS[t].elo);
+  const data = simulate(eloR, sf1, sf2);
+
+  // Lens 3: AI ensemble
+  const aiR = {};
+  f4.forEach(t=>{ const d=TEAMS[t];
+    aiR[t] = 0.6*d.elo + 0.4*(d.fifa+60) + FORM_W*d.change + SQUAD_ADJ[t]; });
+  const aiSim = simulate(aiR, sf1, sf2);
+  let mkt = {}; f4.forEach(t=>mkt[t]=impliedP(TEAMS[t].odds));
+  const mTot = f4.reduce((s,t)=>s+mkt[t],0); f4.forEach(t=>mkt[t]/=mTot);
+  const ai = {}; f4.forEach(t=>ai[t]=0.65*aiSim[t]+0.35*mkt[t]);
+
+  // Lens 1: poll
+  const raw = {}; document.querySelectorAll("#pollInputs input").forEach(i=>raw[i.dataset.team]=+i.value);
+  const pTot = f4.reduce((s,t)=>s+(raw[t]||0),0);
+  const poll = {}; f4.forEach(t=>poll[t]= pTot>0 ? (raw[t]||0)/pTot : null);
+
+  // Render
+  const res = document.getElementById("results"); res.innerHTML="";
+  [...f4].sort((a,b)=>ai[b]-ai[a]).forEach(t=>{
+    const row = (cls,label,v)=> v==null ? "" :
+      `<div class="lens-row"><span>${label}</span>
+        <div class="bar-track"><div class="bar ${cls}" style="width:${(v*100).toFixed(1)}%"></div></div>
+        <span class="pct">${(v*100).toFixed(1)}%</span></div>`;
+    res.insertAdjacentHTML("beforeend",
+      `<div class="team-block"><div class="team-name">
+         <span>${TEAMS[t].flag} ${t}</span>
+         <span class="star"><span class="avatar">${initials(TEAMS[t].star)}</span>${TEAMS[t].star} &middot; &euro;${TEAMS[t].value >= 1000 ? (TEAMS[t].value/1000).toFixed(2)+"B" : TEAMS[t].value.toFixed(0)+"M"} squad</span>
+       </div>
+       ${row("poll","Poll",poll[t])}${row("data","Data",data[t])}${row("ai","AI",ai[t])}</div>`);
+  });
+
+  const top = f4.reduce((a,b)=> ai[b]>ai[a]?b:a);
+  const topData = f4.reduce((a,b)=> data[b]>data[a]?b:a);
+  const topPoll = pTot>0 ? f4.reduce((a,b)=> poll[b]>poll[a]?b:a) : null;
+  let v = `<b>AI ensemble pick: ${top}</b> (${(ai[top]*100).toFixed(1)}%). `;
+  v += topData===top ? `The pure-data lens agrees.` : `The pure-data lens prefers <b>${topData}</b> (${(data[topData]*100).toFixed(1)}%).`;
+  if(topPoll) v += topPoll===top ? ` So does the crowd.` : ` The crowd says <b>${topPoll}</b> (${(poll[topPoll]*100).toFixed(1)}%).`;
+  document.getElementById("verdict").innerHTML = v;
+});
+</script>
+</body>
+</html>

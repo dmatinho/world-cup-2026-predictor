@@ -18,13 +18,13 @@ An interactive model and dashboard comparing three ways of predicting the 2026 W
 
 ## Data sources
 
-Elo & FIFA ratings: worldfootballrankings.com (Jul 9, 2026) 
-Odds: FanDuel/ESPN (Jul 3–9, 2026) 
-Squad values: Transfermarkt (2026 WC squads) 
-Data is embedded in `index.html` and updated manually.
+- Elo & FIFA ratings: worldfootballrankings.com (Jul 9, 2026) 
+- Odds: FanDuel/ESPN (Jul 3–9, 2026) 
+- Squad values: Transfermarkt (2026 WC squads) 
+- Data is embedded in `index.html` and updated manually.
 
 ---
 
-Powered By Fable 5 - Claude
+- Powered By Fable 5 - Claude
 
-Built with ❤️‍🔥 by [Daniela Matinho](https://www.linkedin.com/in/danielamatinho) · AI, Actually Newsletter
+- Built with ❤️‍🔥 by [Daniela Matinho](https://www.linkedin.com/in/danielamatinho) · AI, Actually Newsletter

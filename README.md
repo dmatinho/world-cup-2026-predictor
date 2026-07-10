@@ -23,6 +23,15 @@ An interactive model and dashboard comparing three ways of predicting the 2026 W
 - Squad values: Transfermarkt (2026 WC squads) 
 - Data is embedded in `index.html` and updated manually.
 
+## Run the model yourself
+
+The same model is available as a standalone script:
+
+    python3 wc2026_model.py
+
+Edit `SEMIFINAL_1`, `SEMIFINAL_2`, and `POLL` at the top of the file,
+then run — it prints all three lenses and saves `wc2026_results.csv`.
+
 ---
 
 - Powered By Fable 5 - Claude

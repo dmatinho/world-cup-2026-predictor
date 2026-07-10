@@ -26,4 +26,5 @@ Data is embedded in `index.html` and updated manually.
 ---
 
 Powered By Fable 5 - Claude
+
 Built with ❤️‍🔥 by [Daniela Matinho](https://www.linkedin.com/in/danielamatinho) · AI, Actually Newsletter

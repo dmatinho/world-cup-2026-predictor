@@ -6,7 +6,7 @@ An interactive model and dashboard comparing three ways of predicting the 2026 W
 2. **📊 What the data says** — Elo ratings (every international match since 1901, importance-weighted) run through 200,000 Monte Carlo simulations of the remaining bracket
 3. **🤖 What an AI-assisted model says** — an ensemble of Elo, FIFA points, tournament form, player quality (Transfermarkt squad market values), and de-vigged betting-market odds
 
-**Live demo:** enable GitHub Pages on this repo (Settings → Pages → Deploy from branch → main, root) and it's served at `https://<username>.github.io/<repo>/`.
+**Live demo:** enable GitHub Pages on this repo (Settings → Pages → Deploy from branch → main, root) and it's served at https://dmatinho.github.io/world-cup-2026-predictor/.
 
 ## How it works
 

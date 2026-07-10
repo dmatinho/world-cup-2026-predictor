@@ -50,6 +50,14 @@
   details.why p{font-size:13px;color:var(--muted);line-height:1.6;margin-top:10px}
   details.why b{color:var(--text)}
   .avatar{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--data);color:#fff;font-size:9px;font-weight:700}
+  .champ{display:none;text-align:center;background:linear-gradient(135deg,#fff8e6,#f0fff4);border:2px solid var(--poll);border-radius:14px;padding:22px;margin-bottom:18px}
+  .champ .champ-label{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:6px}
+  .champ .champ-flag{font-size:52px;line-height:1.1}
+  .champ .champ-team{font-size:28px;font-weight:800;margin:2px 0}
+  .champ .champ-prob{font-size:20px;font-weight:700;color:var(--ai)}
+  .champ .champ-picks{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .champ .pick{font-size:12px;color:var(--muted);background:var(--bg);border:1px solid var(--border);border-radius:20px;padding:4px 12px}
+  .champ .pick b{color:var(--text)}
   @media(max-width:640px){.lenses{grid-template-columns:1fr}}
 </style>
 </head>
@@ -96,6 +104,7 @@
 
 <div class="card" style="margin-top:20px">
   <h2>Title probabilities</h2>
+  <div class="champ" id="champ"></div>
   <div class="legend">
     <span><span class="dot" style="background:var(--poll)"></span>Poll (people)</span>
     <span><span class="dot" style="background:var(--data)"></span>Data (Elo sim)</span>
@@ -240,6 +249,21 @@ document.getElementById("runBtn").addEventListener("click", ()=>{
   const top = f4.reduce((a,b)=> ai[b]>ai[a]?b:a);
   const topData = f4.reduce((a,b)=> data[b]>data[a]?b:a);
   const topPoll = pTot>0 ? f4.reduce((a,b)=> poll[b]>poll[a]?b:a) : null;
+
+  // Champion banner
+  const champ = document.getElementById("champ");
+  champ.style.display = "block";
+  champ.innerHTML =
+    `<div class="champ-label">&#127942; Predicted Champion</div>
+     <div class="champ-flag">${TEAMS[top].flag}</div>
+     <div class="champ-team">${top}</div>
+     <div class="champ-prob">${(ai[top]*100).toFixed(1)}% chance to lift the trophy</div>
+     <div class="champ-picks">
+       ${topPoll ? `<span class="pick">&#128499;&#65039; Crowd pick: <b>${TEAMS[topPoll].flag} ${topPoll}</b> (${(poll[topPoll]*100).toFixed(0)}%)</span>` : ""}
+       <span class="pick">&#128202; Data pick: <b>${TEAMS[topData].flag} ${topData}</b> (${(data[topData]*100).toFixed(1)}%)</span>
+       <span class="pick">&#129302; AI pick: <b>${TEAMS[top].flag} ${top}</b> (${(ai[top]*100).toFixed(1)}%)</span>
+     </div>`;
+
   let v = `<b>AI ensemble pick: ${top}</b> (${(ai[top]*100).toFixed(1)}%). `;
   v += topData===top ? `The pure-data lens agrees.` : `The pure-data lens prefers <b>${topData}</b> (${(data[topData]*100).toFixed(1)}%).`;
   if(topPoll) v += topPoll===top ? ` So does the crowd.` : ` The crowd says <b>${topPoll}</b> (${(poll[topPoll]*100).toFixed(1)}%).`;

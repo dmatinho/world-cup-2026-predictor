@@ -79,9 +79,9 @@
   </div>
   <div class="lens-card l-ai">
     <h3>&#129302; AI-assisted model</h3>
-    <p>An ensemble: Elo (60%) + FIFA points (40%) + tournament form + <b>player quality</b>
-    (Transfermarkt squad market value &mdash; e.g. France &euro;1.52B vs Switzerland &euro;333M)
-    &mdash; then blended with de-vigged betting-market odds.</p>
+    <p>An ensemble: a base rating from Elo and FIFA points (60/40), adjusted up or down for
+    tournament form and <b>player quality</b> (Transfermarkt squad values &mdash; France &euro;1.52B
+    vs Switzerland &euro;333M) &mdash; then blended with de-vigged betting-market odds.</p>
   </div>
 </div>
 
@@ -131,9 +131,10 @@
 
   <div class="foot">
     Data lens: Elo Monte Carlo (win prob = 1/(1+10^(-&Delta;Elo/400))), bracket-aware.
-    AI lens: blends Elo (60%) + rescaled FIFA points (40%) + tournament form boost
-    + squad strength (player quality via Transfermarkt market value, log z-score &rarr; Elo pts),
-    simulated, then averaged 65/35 with de-vigged betting-market probabilities.
+    AI lens: base rating = 0.6&times;Elo + 0.4&times;rescaled FIFA points, plus additive
+    adjustments for tournament form (0.25&times;Elo gained) and squad strength (player quality via
+    Transfermarkt market value, log z-score &rarr; &plusmn;~70 Elo pts), simulated, then averaged
+    65/35 with de-vigged betting-market probabilities.
     Ratings: worldfootballrankings.com, Jul 9 2026. Odds: FanDuel/ESPN, Jul 3&ndash;9 2026.
     Squad values: Transfermarkt, 2026 WC squads.
   </div>

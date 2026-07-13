@@ -2,7 +2,7 @@
 
 An interactive model and dashboard comparing three ways of predicting the 2026 World Cup winner:
 
-1. **🗳️ What people predict** — crowd wisdom from a LinkedIn poll
+1. **🗳️ What people predict** — crowd wisdom from a LinkedIn poll: https://www.linkedin.com/posts/danielamatinho_fifaworldcup-worldcup2026-ai-ugcPost-7481943938027945985-yQ_Y/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAA3TpMsBt1bG5n6owAH5wx1nWxxqv5l_nMw
 2. **📊 What the data says** — Elo ratings (every international match since 1901, importance-weighted) run through 200,000 Monte Carlo simulations of the remaining bracket
 3. **🤖 What an AI-assisted model says** — a base rating from Elo and FIFA points (60/40), adjusted for tournament form and player quality (Transfermarkt squad market values), then blended with de-vigged betting-market odds
 
